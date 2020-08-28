@@ -1,6 +1,7 @@
 // ServerAidlInterface.aidl
 package com.example.aidlserver;
 
+import com.example.aidlserver.bean.Person;
 // Declare any non-default types here with import statements
 
 interface ServerAidlInterface {
@@ -12,4 +13,6 @@ interface ServerAidlInterface {
             double aDouble, String aString);
 
     void registData(String data);
+
+    void customDataTest(in Person persion);
 }

@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import com.example.aidlserver.bean.Person
 
 class ServerService : Service() {
 
@@ -26,7 +27,7 @@ class ServerService : Service() {
     private val mBinder: ServerAidlInterface.Stub = object : ServerAidlInterface.Stub() {
 
         override fun registData(data: String?) {
-            Log.d("czh", "received from client:$data")
+            Log.d("czh", "server: received from client:$data")
         }
 
         override fun basicTypes(
@@ -38,6 +39,10 @@ class ServerService : Service() {
             aString: String?
         ) {
 
+        }
+
+        override fun customDataTest(persion: Person?) {
+            Log.d("czh","server: received customData from client:${persion?.name}")
         }
 
     }

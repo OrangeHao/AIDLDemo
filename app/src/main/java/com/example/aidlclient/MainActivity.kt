@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import com.example.aidlserver.ServerAidlInterface
+import com.example.aidlserver.bean.Person
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.StringBuilder
 
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         sendBtn.setOnClickListener {
             addMessage("send message to server:")
             mService?.registData("1234")
+            mService?.customDataTest(Person("client person"))
         }
 
         clearBtn.setOnClickListener {

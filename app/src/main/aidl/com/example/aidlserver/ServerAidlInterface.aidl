@@ -2,6 +2,7 @@
 package com.example.aidlserver;
 
 import com.example.aidlserver.bean.Person;
+import com.example.aidlserver.callback.AidlCommandCallBack;
 // Declare any non-default types here with import statements
 
 interface ServerAidlInterface {
@@ -15,4 +16,7 @@ interface ServerAidlInterface {
     void registData(String data);
 
     void customDataTest(in Person persion);
+
+     void registerCallBack(AidlCommandCallBack listener);
+    void removeCallBack(AidlCommandCallBack listener);
 }

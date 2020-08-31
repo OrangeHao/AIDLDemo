@@ -30,6 +30,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/connectBtn"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerCallBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="register  callBack"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sendBtn"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clearBtn"

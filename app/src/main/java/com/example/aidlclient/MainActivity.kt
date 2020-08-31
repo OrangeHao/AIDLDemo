@@ -4,15 +4,16 @@ import android.app.Service
 import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.aidlserver.ServerAidlInterface
 import com.example.aidlserver.bean.Person
+import com.example.aidlserver.callback.AidlCommandCallBack
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +41,29 @@ class MainActivity : AppCompatActivity() {
         clearBtn.setOnClickListener {
             mSb.clear()
             messageShowText.text = ""
+        }
+
+        registerCallBackBtn.setOnClickListener {
+            //重复注册会false
+            try {
+//                mService?.registerCallBack(mListener)
+                mService?.registerCallBack(object :AidlCommandCallBack.Stub(){
+                    override fun onCommandCallBack(key: String?, cmdStr: String?) {
+                        addMessage("client onCommandCallBack:$key")
+                        Log.d("czh",cmdStr)
+                    }
+                })
+            }catch (e:RemoteException){
+                Log.d("czh","client register false")
+                addMessage("client register callback false")
+            }
+        }
+    }
+
+
+    private val mListener:AidlCommandCallBack=object :AidlCommandCallBack.Stub(){
+        override fun onCommandCallBack(key: String?, cmdStr: String?) {
+            addMessage("client onCommandCallBack:$cmdStr")
         }
     }
 
@@ -101,5 +125,6 @@ class MainActivity : AppCompatActivity() {
     private fun addMessage(message:String){
         mSb.append(message).append('\n')
         messageShowText.text = mSb.toString()
+        nestScrollView.fullScroll(View.FOCUS_DOWN)
     }
 }

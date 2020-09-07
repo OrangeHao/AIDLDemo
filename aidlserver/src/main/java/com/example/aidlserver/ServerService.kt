@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.os.RemoteCallbackList
+import android.os.RemoteException
 import android.util.Log
 import com.example.aidlserver.bean.Person
 import com.example.aidlserver.callback.AidlCommandCallBack
@@ -75,9 +76,13 @@ class ServerService : Service() {
         val timeA=System.currentTimeMillis()
         val size=mCallBacks.beginBroadcast()
         for (index in 0 until size){
-            Log.d("czh","server onCommandCallBack $index")
-            val temp=mCallBacks.getBroadcastItem(index)
-            temp.onCommandCallBack("$index",testStr)
+            try {
+                Log.d("czh","server onCommandCallBack $index")
+                val temp=mCallBacks.getBroadcastItem(index)
+                temp.onCommandCallBack("$index",testStr)
+            }catch (e:RemoteException){
+
+            }
         }
         mCallBacks.finishBroadcast()
         val timeB=System.currentTimeMillis()

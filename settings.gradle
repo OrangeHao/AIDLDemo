@@ -1,3 +1,4 @@
 rootProject.name='AIDLClient'
 include ':app'
 include ':aidlserver'
+include ':aidlmodule'

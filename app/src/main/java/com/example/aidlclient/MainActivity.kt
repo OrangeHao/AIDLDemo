@@ -125,6 +125,9 @@ class MainActivity : AppCompatActivity() {
     private fun addMessage(message:String){
         mSb.append(message).append('\n')
         messageShowText.text = mSb.toString()
-        nestScrollView.fullScroll(View.FOCUS_DOWN)
+
+        nestScrollView.post {
+            nestScrollView.fullScroll(View.FOCUS_DOWN)
+        }
     }
 }
